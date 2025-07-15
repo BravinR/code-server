@@ -27,7 +27,7 @@ RUN sudo chown -R coder:coder /home/coder/.local
 RUN code-server --install-extension esbenp.prettier-vscode
 
 # Install apt packages:
-RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install ubuntu-make
+RUN DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ubuntu-make
 #RUN sudo apt-get install -y ubuntu-make
 
 # Copy files: 
