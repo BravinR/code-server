@@ -26,8 +26,11 @@ RUN sudo chown -R coder:coder /home/coder/.local
 # Note: we use a different marketplace than VS Code. See https://github.com/cdr/code-server/blob/main/docs/FAQ.md#differences-compared-to-vs-code
 RUN code-server --install-extension esbenp.prettier-vscode
 
-ENV TZ=America/New_York
-RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends tzdata
+# Set timezone:
+RUN ln -snf /usr/share/zoneinfo/$CONTAINER_TIMEZONE /etc/localtime && echo $CONTAINER_TIMEZONE > /etc/timezone
+
+# Install dependencies:
+RUN sudo apt-get update && sudo apt-get install -y tzdata
 
 # Install apt packages:
 RUN DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ubuntu-make
